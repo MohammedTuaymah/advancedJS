@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="title1" style="visibility: hidden;">Title 1</div>
+    <div id="title2" style="visibility: hidden;">Title 2</div>
+    <div id="title3" style="visibility: hidden;">Title 3</div>
+    <div id="title4" style="visibility: hidden;">Title 4</div>
+    
+</body>
+
+<script>
+
+    // setTimeout(function(){
+    //     document.getElementById("title1").style.visibility = "visible"
+    //     setTimeout(function(){
+    //         document.getElementById("title2").style.visibility = "visible"
+    //         setTimeout(function(){
+    //             document.getElementById("title3").style.visibility = "visible"
+    //             setTimeout(function(){
+    //                 document.getElementById("title4").style.visibility = "visible"
+    //             }, 1000)
+    //         }, 1000)
+    //     }, 1000)
+    // }, 1000)
+
+    //////////////////////////////////////////////////////////
+
+
+    // let p = new Promise(function(resolve , reject){// reject والثاني  resolve عادة الباراميتر الاول يسمى 
+    //     console.log("starting the async code")
+    //     // async code
+    //     setTimeout(function(){
+    //         document.getElementById("title1").style.visibility = "visible"
+    //         console.log("calling resolve")
+    //         reject("error with showing the title1")
+    //     }, 2000)
+    // })
+
+    // console.log("after the promise creation and before then and catch")
+
+    // p.then(function(){
+    //     console.log("calling then")
+    // }).catch(function(errorMessage){
+    //     console.log("error:" + errorMessage)
+    // })
+
+    // console.log("after then and catch")
+
+
+
+
+
+
+
+
+
+
+    //using async & await
+    async function showTitles(){
+        await new Promise((resolve, reject) => {
+            // async غير متزامن
+            setTimeout(() => {
+                document.getElementById("title1").style.visibility = "visible"
+                resolve()
+            }, 1000)
+        })
+
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                document.getElementById("title2").style.visibility = "visible"
+                resolve()
+            }, 1000)
+        })
+
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                document.getElementById("title3").style.visibility = "visible"
+                resolve()
+            }, 1000)
+        })
+
+        setTimeout(() => {
+            document.getElementById("title4").style.visibility = "visible" //العنصر الاخير مايحتاج احطه داخل بروميس د:5
+            resolve()
+        }, 1000)
+    }
+    showTitles()
+
+
+
+
+
+
+    // new Promise((resolve, reject) => {
+    //     // async غير متزامن
+    //     setTimeout(() => {
+    //         document.getElementById("title1").style.visibility = "visible"
+    //         resolve()
+    //     }, 1000)
+    // }).then(() => {
+        
+    //     return new Promise((resolve) => {// حطيت ريتيرن عشان يستبدل الذن كاملة ب بروميس ف استخدم الذن الثانية كمان مرة د:11
+    //         setTimeout(() => {
+    //             document.getElementById("title2").style.visibility = "visible"
+    //             resolve()
+    //         }, 1000)
+    //     })
+    // }).then(() => {
+    //     return new Promise((resolve) => {
+    //         setTimeout(() => {
+    //                 document.getElementById("title3").style.visibility = "visible"
+    //                 resolve()
+    //             }, 1000)
+    //     })
+    // }).then(() => {
+    //     setTimeout(() => {
+    //             document.getElementById("title4").style.visibility = "visible"
+    //         }, 1000)
+    // })
+
+</script>
+</html>

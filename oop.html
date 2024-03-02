@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+
+
+</body>
+
+<script>
+        class Animal{
+
+            constructor(customName, customColor){//الخصائص هذي تكون موجودة في كل مرة انشئ فيها حيوان من القالب انيمال
+                this.name = customName
+                this.color = customColor
+            }
+
+            move(){//تعريف فنكشن داخل الاوبجيكت
+                console.log("Moving" + this.name)
+            }
+
+            jump(){//تعريف فنكشن داخل الاوبجيكت
+                console.log("jumping" + this.color)
+            }
+        }
+
+        //Animal انشاء اوبجيكت بناءا على القالب
+        let lion = new Animal("اسد","بني")
+        let tiger = new Animal("نمر","برتقالي")
+
+        //console.log(lion.name)
+
+        lion.move()     //الدالة موف تكون من خلال القالب انيمال
+        lion.jump()
+
+        tiger.move() 
+</script>
+
+</html>

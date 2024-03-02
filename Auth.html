@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="./PRAYERTIMES_CHALLENGE/node_modules/axios/dist/axios.min.js"></script><!-- الوصول الى ملفات النود لاني بستخدم مكتبة اكسيوس -->
+</head>
+<body>
+    <h2>Hello World</h2>
+</body>
+
+<script>
+    axios.post('https://reqres.in/api/login', {
+        "email": "charles.morris@reqres.in",
+        "password": "pisl"
+    })
+    .then(function (response) {
+        let token = response.data.token //حفظ التوكين في المتغير توكين اللي انشأته فوق
+
+        localStorage.setItem("token", token)
+        console.log("token received ", token)
+        
+        createNewUser()//الدالة هذي ما استدعيها الا لمن التوكين يكون جاهز  "في السطر 23" جهزت التوكين
+    })
+
+    function createNewUser()
+    {
+        let token = localStorage.getItem("token")//عشان التوكين في الاسفل تكون من اللي في اللوكال ستوريج
+        let config = {
+            headers: {
+                    "Authorization": `Bearer ${token}`,//حددت الهيدرز اللي بيتم ارسالهم مع الكونفيق 
+                }
+            }
+            axios.post('https://reqres.in/api/users', 
+            {
+                "name": "mohammed",
+                "job": "leader"
+            }, config)
+            .then(function (response) {
+                console.log(response)
+            })
+    }
+</script>
+</html>

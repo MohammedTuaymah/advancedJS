@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>authChallenge</title>
+
+    <script src="./PRAYERTIMES_CHALLENGE/node_modules/axios/dist/axios.min.js"></script>
+
+    <style>
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body style="direction: rtl;">
+
+    <div style="height: 100vh;" class="center">
+        <div style="background-color: rgb(194, 194, 194); padding: 20px; box-shadow: 0px 10px 15px rgb(194, 194, 194);">
+            <div>
+                <h1>تسجيل الدخول</h1>
+                <hr>
+                <h3>الايميل</h3>
+                <input id="email-input" type="email">
+
+                <h3>الرمز السري</h3>
+                <input id="password-input" type="password">
+
+                <button id="login-btn" style="display: block; margin-top: 20px;">
+                    تسجيل الدخول
+                </button>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script>
+        document.getElementById("login-btn").addEventListener("click", function(){
+            let email = document.getElementById("email-input").value
+            let password = document.getElementById("password-input").value
+            axios.post('https://reqres.in/api/login', 
+            {
+                "email": email,
+                "password": password
+            })
+            .then(function (response) {//بمجرد نجاح تسجيل الدخول ف اطلب التوكين
+                let token = response.data.token //حفظ التوكين في المتغير توكين اللي انشأته فوق
+
+                localStorage.setItem("token", token)
+                console.log("token received ", token)
+
+                window.location = "loginSuccess.html"//النقل الى الصفحة الاخرى
+                
+            }).catch(error => {
+                console.log(error)
+                alert(error.response.data.error)// اظهار سبب الخطأ بالضبط
+            })
+        })
+    </script>
+</body>
+</html>
